@@ -4,6 +4,6 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://example.github.io',
-  base: '/',
+  site: 'https://sereinai6.github.io',
+  base: '/phone-compare',
 });
