@@ -1,0 +1,62 @@
+---
+interface Props {
+  slot: string;
+  format?: string;
+  responsive?: boolean;
+  style?: string;
+  className?: string;
+}
+
+const { 
+  slot, 
+  format = "auto", 
+  responsive = true,
+  style = "display:block",
+  className = ""
+} = Astro.props;
+---
+
+<div class={`ad-container ${className}`}>
+  <ins class="adsbygoogle"
+       style={style}
+       data-ad-client="ca-pub-3850261589969129"
+       data-ad-slot={slot}
+       data-ad-format={format}
+       data-full-width-responsive={responsive.toString()}></ins>
+</div>
+
+<script is:inline>
+  // Push ads after page load
+  (function() {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.error('AdSense error:', e);
+    }
+  })();
+</script>
+
+<style>
+  .ad-container {
+    margin: 1.5rem 0;
+    padding: 0.5rem;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ad-container::before {
+    content: 'Advertisement';
+    position: absolute;
+    top: 0.25rem;
+    left: 0.5rem;
+    font-size: 0.65rem;
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

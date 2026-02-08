@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getBrandsWithPhones, getTotalPhoneCount } from "../data/api-phones";
+import AdBanner from "../components/AdBanner.astro";
 
 const brandsWithPhones = getBrandsWithPhones();
 const totalPhones = getTotalPhoneCount();
@@ -91,13 +92,27 @@ const INITIAL_BRANDS = 15;
     </div>
   </div>
 
+  <!-- Top Banner Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3850261589969129"
+         data-ad-slot="1234567890"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+  </div>
+  <script is:inline>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
   {brandsWithPhones.map((bwp, brandIdx) => (
-    <section
-      class={`brand-section ${brandIdx >= INITIAL_BRANDS ? "brand-overflow" : ""}`}
-      id={`brand-${bwp.brand.brand_slug}`}
-      data-brand={bwp.brand.brand_name}
-      aria-labelledby={`brand-title-${bwp.brand.brand_slug}`}
-    >
+    <>
+      <section
+        class={`brand-section ${brandIdx >= INITIAL_BRANDS ? "brand-overflow" : ""}`}
+        id={`brand-${bwp.brand.brand_slug}`}
+        data-brand={bwp.brand.brand_name}
+        aria-labelledby={`brand-title-${bwp.brand.brand_slug}`}
+      >
       <div class="brand-header">
         <h2 class="brand-title" id={`brand-title-${bwp.brand.brand_slug}`}>{bwp.brand.brand_name}</h2>
         <span class="brand-count">{bwp.phones.length} phones</span>
@@ -136,6 +151,22 @@ const INITIAL_BRANDS = 15;
         </button>
       )}
     </section>
+    
+    {/* Insert ad after every 5 brands */}
+    {(brandIdx + 1) % 5 === 0 && brandIdx < brandsWithPhones.length - 1 && (
+      <div class="ad-container mid-content-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3850261589969129"
+             data-ad-slot="9876543210"
+             data-ad-format="horizontal"
+             data-full-width-responsive="true"></ins>
+        <script is:inline>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    )}
+    </>
   ))}
 
   {brandsWithPhones.length > INITIAL_BRANDS && (
@@ -292,6 +323,32 @@ const INITIAL_BRANDS = 15;
   .show-more-brands-btn { margin-bottom: 2rem; padding: 0.6rem 0; font-size: 0.82rem; }
 
   .no-results { text-align: center; color: var(--c-text-muted); padding: 3rem 0; font-size: 0.85rem; }
+
+  /* ── Ad Styles ── */
+  .ad-container {
+    margin: 1.5rem 0;
+    padding: 1rem 0.5rem;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    min-height: 100px;
+    position: relative;
+  }
+  
+  .ad-container::before {
+    content: 'Advertisement';
+    position: absolute;
+    top: 0.25rem;
+    left: 0.5rem;
+    font-size: 0.65rem;
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .mid-content-ad {
+    margin: 2rem 0;
+  }
 
   /* ── Compare Dock ── */
   .compare-dock {

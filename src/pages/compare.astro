@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getAllPhones, type ApiPhone } from "../data/api-phones";
+import AdBanner from "../components/AdBanner.astro";
 
 const phones = getAllPhones();
 
@@ -57,6 +58,19 @@ if (slugA && slugB) {
   <div id="compare-root">
     <div class="loading-state">Loading...</div>
   </div>
+
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3850261589969129"
+         data-ad-slot="1122334455"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+  </div>
+  <script is:inline>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </BaseLayout>
 
 <script define:vars={{ phonesJSON: JSON.stringify(phones) }}>
@@ -199,6 +213,16 @@ if (slugA && slugB) {
         </div>
       </div>
 
+      <!-- Mid-content Ad -->
+      <div class="ad-container mid-compare-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3850261589969129"
+             data-ad-slot="5544332211"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+      </div>
+
       <div class="spec-table-wrap">
         <table class="spec-table">
           <colgroup>
@@ -216,6 +240,15 @@ if (slugA && slugB) {
           Compare Other Devices
         </a>
       </div>`;
+    
+    // Initialize ads after content is rendered
+    setTimeout(() => {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('AdSense error:', e);
+      }
+    }, 100);
   }
 
   render();
@@ -326,6 +359,32 @@ if (slugA && slugB) {
     border-radius: var(--radius); transition: all 0.15s;
   }
   .cta-link:hover { background: var(--c-accent); color: #fff; }
+
+  /* Ad Styles */
+  .ad-container {
+    margin: 1.5rem 0;
+    padding: 1rem 0.5rem;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    min-height: 100px;
+    position: relative;
+  }
+  
+  .ad-container::before {
+    content: 'Advertisement';
+    position: absolute;
+    top: 0.25rem;
+    left: 0.5rem;
+    font-size: 0.65rem;
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .mid-compare-ad {
+    margin: 2rem 0;
+  }
 
   @media (max-width: 640px) {
     .vs-hero { gap: 0.5rem; padding: 0.25rem 0 1.5rem; }
