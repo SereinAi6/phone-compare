@@ -1,0 +1,293 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getAllPhones, type ApiPhone } from "../data/api-phones";
+
+const phones = getAllPhones();
+---
+
+<BaseLayout title="Device Comparison — SpecMatch" description="Detailed specs comparison">
+  <div id="compare-root">
+    <div class="loading-state">Loading...</div>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ phonesJSON: JSON.stringify(phones) }}>
+  const phones = JSON.parse(phonesJSON);
+  const phoneMap = {};
+  phones.forEach(p => phoneMap[p.slug] = p);
+
+  function esc(s) {
+    if (!s) return "—";
+    const d = document.createElement("div");
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
+  function bdtToUsd(s) {
+    if (!s) return null;
+    const num = parseInt(String(s).replace(/,/g, ""), 10);
+    if (isNaN(num)) return null;
+    return "$" + Math.round(num / 121).toLocaleString();
+  }
+
+  function specRow(label, valA, valB) {
+    const a = esc(valA);
+    const b = esc(valB);
+    const diff = a !== b ? ' class="diff"' : '';
+    return `<tr${diff}><td class="spec-label">${label}</td><td class="spec-val spec-a">${a}</td><td class="spec-val spec-b">${b}</td></tr>`;
+  }
+
+  function render() {
+    const root = document.getElementById("compare-root");
+    const params = new URLSearchParams(window.location.search);
+    const slugA = params.get("a");
+    const slugB = params.get("b");
+    const phoneA = phoneMap[slugA];
+    const phoneB = phoneMap[slugB];
+
+    if (!phoneA || !phoneB) {
+      root.innerHTML = `
+        <div class="error-state">
+          <p>Please select two devices to compare</p>
+          <a href="/" class="cta-link">← Back to selection</a>
+        </div>`;
+      return;
+    }
+
+    const a = phoneA.specs;
+    const b = phoneB.specs;
+
+    document.title = `${phoneA.phone_name} vs ${phoneB.phone_name} — SpecMatch`;
+
+    const sections = [
+      { title: "General", rows: [
+        specRow("Brand", a.brand, b.brand),
+        specRow("Model", a.model, b.model),
+        specRow("Release Date", a.release_date, b.release_date),
+        specRow("Status", a.status, b.status),
+        specRow("OS", a.operating_system, b.operating_system),
+        specRow("UI", a.user_interface, b.user_interface),
+      ]},
+      { title: "Performance", rows: [
+        specRow("Chipset", a.chipset, b.chipset),
+        specRow("CPU", a.cpu, b.cpu),
+        specRow("Cores", a.cpu_cores, b.cpu_cores),
+        specRow("Process", a.fabrication, b.fabrication),
+        specRow("GPU", a.gpu, b.gpu),
+        specRow("RAM", a.ram, b.ram),
+        specRow("RAM Type", a.ram_type, b.ram_type),
+        specRow("Storage", a.internal_storage, b.internal_storage),
+        specRow("Storage Type", a.storage_type, b.storage_type),
+      ]},
+      { title: "Display", rows: [
+        specRow("Display Type", a.display_type, b.display_type),
+        specRow("Screen Size", a.screen_size, b.screen_size),
+        specRow("Resolution", a.resolution, b.resolution),
+        specRow("Refresh Rate", a.refresh_rate, b.refresh_rate),
+        specRow("Pixel Density", a.pixel_density, b.pixel_density),
+        specRow("Brightness", a.brightness, b.brightness),
+        specRow("Screen-to-Body", a.screen_to_body_ratio, b.screen_to_body_ratio),
+        specRow("Screen Protection", a.screen_protection, b.screen_protection),
+      ]},
+      { title: "Camera", rows: [
+        specRow("Main Camera", a.primary_camera_resolution, b.primary_camera_resolution),
+        specRow("Video", a.primary_camera_video_recording, b.primary_camera_video_recording),
+        specRow("Front Camera", a.selfie_camera_resolution, b.selfie_camera_resolution),
+      ]},
+      { title: "Battery", rows: [
+        specRow("Battery", a.battery_capacity, b.battery_capacity),
+        specRow("Fast Charging", a.quick_charging, b.quick_charging),
+      ]},
+      { title: "Design", rows: [
+        specRow("Height", a.height, b.height),
+        specRow("Width", a.width, b.width),
+        specRow("Thickness", a.thickness, b.thickness),
+        specRow("Weight", a.weight, b.weight),
+        specRow("Colors", a.colors, b.colors),
+        specRow("Water Resistance", a.waterproof, b.waterproof),
+        specRow("IP Rating", a.ip_rating, b.ip_rating),
+      ]},
+      { title: "Connectivity", rows: [
+        specRow("Network", a.network, b.network),
+        specRow("SIM", a.sim_slot, b.sim_slot),
+        specRow("Wi-Fi", a.wlan, b.wlan),
+        specRow("Bluetooth", a.bluetooth, b.bluetooth),
+        specRow("GPS", a.gps, b.gps),
+        specRow("Audio Jack", a.audio_jack, b.audio_jack),
+        specRow("Sensors", a.sensors, b.sensors),
+      ]},
+      { title: "Price", rows: [
+        specRow("Official Price", bdtToUsd(a.price_official), bdtToUsd(b.price_official)),
+        specRow("Market Price", bdtToUsd(a.price_unofficial), bdtToUsd(b.price_unofficial)),
+      ]},
+    ];
+
+    const tableHTML = sections.map(s =>
+      `<thead><tr><th colspan="3" class="section-head">${s.title}</th></tr></thead><tbody>${s.rows.join("")}</tbody>`
+    ).join("");
+
+    root.innerHTML = `
+      <a href="/" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back
+      </a>
+
+      <div class="vs-hero">
+        <div class="vs-phone vs-phone-a">
+          <div class="vs-img-frame"><img src="${esc(phoneA.image)}" alt="${esc(phoneA.phone_name)}" loading="lazy" onerror="this.style.display='none'" /></div>
+          <div class="vs-phone-label">A</div>
+          <div class="vs-phone-brand">${esc(phoneA.brand)}</div>
+          <h2 class="vs-phone-name">${esc(phoneA.phone_name)}</h2>
+        </div>
+        <div class="vs-center">
+          <div class="vs-badge">VS</div>
+        </div>
+        <div class="vs-phone vs-phone-b">
+          <div class="vs-img-frame"><img src="${esc(phoneB.image)}" alt="${esc(phoneB.phone_name)}" loading="lazy" onerror="this.style.display='none'" /></div>
+          <div class="vs-phone-label">B</div>
+          <div class="vs-phone-brand">${esc(phoneB.brand)}</div>
+          <h2 class="vs-phone-name">${esc(phoneB.phone_name)}</h2>
+        </div>
+      </div>
+
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <colgroup>
+            <col class="col-label" />
+            <col class="col-a" />
+            <col class="col-b" />
+          </colgroup>
+          ${tableHTML}
+        </table>
+      </div>
+
+      <div class="bottom-cta">
+        <a href="/" class="cta-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Compare Other Devices
+        </a>
+      </div>`;
+  }
+
+  render();
+</script>
+
+<style is:global>
+  .error-state {
+    text-align: center; padding: 4rem 1rem;
+    color: var(--c-text-muted); font-size: 0.95rem;
+  }
+  .error-state .cta-link { margin-top: 1rem; display: inline-flex; }
+  .loading-state {
+    text-align: center; padding: 4rem 1rem;
+    color: var(--c-text-muted); font-size: 0.9rem;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.8rem; color: var(--c-accent); font-weight: 500; margin-bottom: 1rem;
+  }
+  .back-link:hover { color: var(--c-accent-dark); }
+
+  .vs-hero {
+    display: flex; align-items: flex-start; justify-content: center;
+    gap: 1rem; padding: 0.5rem 0 2rem;
+  }
+  .vs-phone { flex: 1; max-width: 280px; text-align: center; }
+  .vs-img-frame {
+    position: relative; height: 220px; padding: 1rem;
+    background: var(--c-surface); border: 1.5px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;
+  }
+  .vs-phone-a .vs-img-frame { border-bottom: 3px solid var(--c-accent); }
+  .vs-phone-b .vs-img-frame { border-bottom: 3px solid var(--c-green); }
+  .vs-img-frame img { max-height: 190px; max-width: 160px; object-fit: contain; }
+  .vs-phone-label {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 6px;
+    font-size: 0.68rem; font-weight: 800; margin-bottom: 0.3rem;
+  }
+  .vs-phone-a .vs-phone-label { background: var(--c-accent-light); color: var(--c-accent); }
+  .vs-phone-b .vs-phone-label { background: var(--c-green-light); color: var(--c-green); }
+  .vs-phone-brand {
+    font-size: 0.68rem; font-weight: 600; color: var(--c-text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .vs-phone-name { font-size: 1.1rem; font-weight: 700; color: var(--c-text); margin: 0.1rem 0 0.2rem; }
+  .vs-center {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.6rem; padding-top: 3rem; flex-shrink: 0;
+  }
+  .vs-badge {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--c-header-bg); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem; font-weight: 800; letter-spacing: 0.05em;
+  }
+
+  /* Spec Table */
+  .spec-table-wrap {
+    background: var(--c-surface);
+    border: 1.5px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .col-label { width: 25%; }
+  .col-a, .col-b { width: 37.5%; }
+  .section-head {
+    background: var(--c-bg);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--c-text);
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--c-border);
+    border-top: 1px solid var(--c-border);
+  }
+  .spec-table td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--c-border-light);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .spec-label {
+    font-weight: 600;
+    color: var(--c-text-secondary);
+    white-space: nowrap;
+  }
+  .spec-val {
+    color: var(--c-text);
+    word-break: break-word;
+  }
+  tr.diff .spec-val { background: #fffbe6; }
+  tr.diff .spec-a { border-left: 2px solid var(--c-accent); }
+  tr.diff .spec-b { border-left: 2px solid var(--c-green); }
+
+  .bottom-cta { text-align: center; padding: 0.5rem 0 1rem; }
+  .cta-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.6rem 1.5rem; font-size: 0.85rem; font-weight: 600;
+    color: var(--c-accent); border: 1.5px solid var(--c-accent);
+    border-radius: var(--radius); transition: all 0.15s;
+  }
+  .cta-link:hover { background: var(--c-accent); color: #fff; }
+
+  @media (max-width: 640px) {
+    .vs-hero { gap: 0.5rem; padding: 0.25rem 0 1.5rem; }
+    .vs-img-frame { height: 160px; padding: 0.75rem; }
+    .vs-img-frame img { max-height: 140px; max-width: 120px; }
+    .vs-phone-name { font-size: 0.9rem; }
+    .vs-center { padding-top: 2rem; }
+    .vs-badge { width: 38px; height: 38px; font-size: 0.72rem; }
+    .spec-table { font-size: 0.75rem; }
+    .spec-table td { padding: 0.4rem 0.6rem; }
+    .col-label { width: 30%; }
+    .col-a, .col-b { width: 35%; }
+  }
+</style>

@@ -1,0 +1,877 @@
+[
+    {
+        "_id": "647ed21d288dfcda06a04af7",
+        "brand_name": "Asus",
+        "brand_slug": "asus-phones-46",
+        "device_count": 207,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b3c",
+        "brand_name": "Panasonic",
+        "brand_slug": "panasonic-phones-6",
+        "device_count": 123,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b15",
+        "brand_name": "Honor",
+        "brand_slug": "honor-phones-121",
+        "device_count": 293,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b4b",
+        "brand_name": "Sharp",
+        "brand_slug": "sharp-phones-23",
+        "device_count": 82,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b06",
+        "brand_name": "Coolpad",
+        "brand_slug": "coolpad-phones-105",
+        "device_count": 53,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b1e",
+        "brand_name": "iNQ",
+        "brand_slug": "inq-phones-60",
+        "device_count": 5,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b4d",
+        "brand_name": "Sonim",
+        "brand_slug": "sonim-phones-54",
+        "device_count": 24,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b22",
+        "brand_name": "Kyocera",
+        "brand_slug": "kyocera-phones-17",
+        "device_count": 28,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b0e",
+        "brand_name": "Fairphone",
+        "brand_slug": "fairphone-phones-127",
+        "device_count": 5,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af9",
+        "brand_name": "Benefon",
+        "brand_slug": "benefon-phones-15",
+        "device_count": 9,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af6",
+        "brand_name": "Archos",
+        "brand_slug": "archos-phones-90",
+        "device_count": 43,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b12",
+        "brand_name": "Gionee",
+        "brand_slug": "gionee-phones-92",
+        "device_count": 95,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b4a",
+        "brand_name": "Sewon",
+        "brand_slug": "sewon-phones-26",
+        "device_count": 25,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af4",
+        "brand_name": "Amoi",
+        "brand_slug": "amoi-phones-28",
+        "device_count": 47,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b1d",
+        "brand_name": "Innostream",
+        "brand_slug": "innostream-phones-29",
+        "device_count": 18,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b37",
+        "brand_name": "O2",
+        "brand_slug": "o2-phones-30",
+        "device_count": 45,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b59",
+        "brand_name": "Unnecto",
+        "brand_slug": "unnecto-phones-91",
+        "device_count": 30,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b5b",
+        "brand_name": "verykool",
+        "brand_slug": "verykool-phones-70",
+        "device_count": 139,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b24",
+        "brand_name": "LeEco",
+        "brand_slug": "leeco-phones-109",
+        "device_count": 9,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af3",
+        "brand_name": "Amazon",
+        "brand_slug": "amazon-phones-76",
+        "device_count": 25,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b48",
+        "brand_name": "Samsung",
+        "brand_slug": "samsung-phones-9",
+        "device_count": 1447,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b0a",
+        "brand_name": "Emporia",
+        "brand_slug": "emporia-phones-93",
+        "device_count": 15,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b67",
+        "brand_name": "ZTE",
+        "brand_slug": "zte-phones-62",
+        "device_count": 426,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b44",
+        "brand_name": "Qtek",
+        "brand_slug": "qtek-phones-38",
+        "device_count": 21,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b56",
+        "brand_name": "Thuraya",
+        "brand_slug": "thuraya-phones-49",
+        "device_count": 2,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b2f",
+        "brand_name": "Motorola",
+        "brand_slug": "motorola-phones-4",
+        "device_count": 673,
+        "__v": 0
+    },
+    {
+        "_id": "65d3eba13be14e73ad9c2473",
+        "brand_name": "Oukitel",
+        "brand_slug": "oukitel-phones-132",
+        "device_count": 102,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b11",
+        "brand_name": "Gigabyte",
+        "brand_slug": "gigabyte-phones-47",
+        "device_count": 63,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b20",
+        "brand_name": "Jolla",
+        "brand_slug": "jolla-phones-84",
+        "device_count": 4,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b5a",
+        "brand_name": "Vertu",
+        "brand_slug": "vertu-phones-39",
+        "device_count": 17,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b2e",
+        "brand_name": "Modu",
+        "brand_slug": "modu-phones-63",
+        "device_count": 8,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b57",
+        "brand_name": "Toshiba",
+        "brand_slug": "toshiba-phones-44",
+        "device_count": 35,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b41",
+        "brand_name": "Posh",
+        "brand_slug": "posh-phones-101",
+        "device_count": 30,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b65",
+        "brand_name": "Yota",
+        "brand_slug": "yota-phones-99",
+        "device_count": 3,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b10",
+        "brand_name": "Garmin-Asus",
+        "brand_slug": "garmin_asus-phones-65",
+        "device_count": 5,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b42",
+        "brand_name": "Prestigio",
+        "brand_slug": "prestigio-phones-86",
+        "device_count": 56,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b50",
+        "brand_name": "Spice",
+        "brand_slug": "spice-phones-68",
+        "device_count": 120,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b3d",
+        "brand_name": "Pantech",
+        "brand_slug": "pantech-phones-32",
+        "device_count": 72,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b3e",
+        "brand_name": "Parla",
+        "brand_slug": "parla-phones-81",
+        "device_count": 10,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b43",
+        "brand_name": "QMobile",
+        "brand_slug": "qmobile-phones-103",
+        "device_count": 90,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b5e",
+        "brand_name": "Vodafone",
+        "brand_slug": "vodafone-phones-53",
+        "device_count": 87,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b0d",
+        "brand_name": "Eten",
+        "brand_slug": "eten-phones-40",
+        "device_count": 22,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21c288dfcda06a04af0",
+        "brand_name": "Acer",
+        "brand_slug": "acer-phones-59",
+        "device_count": 113,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b46",
+        "brand_name": "Realme",
+        "brand_slug": "realme-phones-118",
+        "device_count": 273,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b4c",
+        "brand_name": "Siemens",
+        "brand_slug": "siemens-phones-3",
+        "device_count": 94,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b04",
+        "brand_name": "Celkon",
+        "brand_slug": "celkon-phones-75",
+        "device_count": 229,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b49",
+        "brand_name": "Sendo",
+        "brand_slug": "sendo-phones-18",
+        "device_count": 19,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04afd",
+        "brand_name": "BlackBerry",
+        "brand_slug": "blackberry-phones-36",
+        "device_count": 92,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b39",
+        "brand_name": "Oppo",
+        "brand_slug": "oppo-phones-82",
+        "device_count": 373,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b64",
+        "brand_name": "Yezz",
+        "brand_slug": "yezz-phones-78",
+        "device_count": 113,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b21",
+        "brand_name": "Karbonn",
+        "brand_slug": "karbonn-phones-83",
+        "device_count": 60,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b4e",
+        "brand_name": "Sony",
+        "brand_slug": "sony-phones-7",
+        "device_count": 162,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af2",
+        "brand_name": "Allview",
+        "brand_slug": "allview-phones-88",
+        "device_count": 157,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b14",
+        "brand_name": "Haier",
+        "brand_slug": "haier-phones-33",
+        "device_count": 59,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b16",
+        "brand_name": "HP",
+        "brand_slug": "hp-phones-41",
+        "device_count": 41,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b4f",
+        "brand_name": "Sony Ericsson",
+        "brand_slug": "sony_ericsson-phones-19",
+        "device_count": 188,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b29",
+        "brand_name": "Meizu",
+        "brand_slug": "meizu-phones-74",
+        "device_count": 87,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af8",
+        "brand_name": "AT&T",
+        "brand_slug": "at&t-phones-57",
+        "device_count": 4,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b51",
+        "brand_name": "T-Mobile",
+        "brand_slug": "t_mobile-phones-55",
+        "device_count": 69,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b27",
+        "brand_name": "Maxon",
+        "brand_slug": "maxon-phones-14",
+        "device_count": 31,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b28",
+        "brand_name": "Maxwest",
+        "brand_slug": "maxwest-phones-87",
+        "device_count": 41,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b33",
+        "brand_name": "NIU",
+        "brand_slug": "niu-phones-79",
+        "device_count": 30,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b5d",
+        "brand_name": "VK Mobile",
+        "brand_slug": "vk_mobile-phones-37",
+        "device_count": 31,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b25",
+        "brand_name": "Lenovo",
+        "brand_slug": "lenovo-phones-73",
+        "device_count": 258,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b47",
+        "brand_name": "Sagem",
+        "brand_slug": "sagem-phones-13",
+        "device_count": 120,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b0f",
+        "brand_name": "Fujitsu Siemens",
+        "brand_slug": "fujitsu_siemens-phones-50",
+        "device_count": 2,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b2a",
+        "brand_name": "Micromax",
+        "brand_slug": "micromax-phones-66",
+        "device_count": 289,
+        "__v": 0
+    },
+    {
+        "_id": "65d3eba13be14e73ad9c2472",
+        "brand_name": "itel",
+        "brand_slug": "itel-phones-131",
+        "device_count": 56,
+        "__v": 0
+    },
+    {
+        "_id": "66a82d1eab24ffb08cd89cdc",
+        "brand_name": "HMD",
+        "brand_slug": "hmd-phones-133",
+        "device_count": 32,
+        "__v": 0
+    },
+    {
+        "_id": "66a82d1eab24ffb08cd89cde",
+        "brand_name": "Umidigi",
+        "brand_slug": "umidigi-phones-135",
+        "device_count": 77,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04aff",
+        "brand_name": "BLU",
+        "brand_slug": "blu-phones-67",
+        "device_count": 369,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b5f",
+        "brand_name": "Wiko",
+        "brand_slug": "wiko-phones-96",
+        "device_count": 102,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b55",
+        "brand_name": "Telit",
+        "brand_slug": "telit-phones-16",
+        "device_count": 30,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04afb",
+        "brand_name": "BenQ-Siemens",
+        "brand_slug": "benq_siemens-phones-42",
+        "device_count": 28,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b01",
+        "brand_name": "BQ",
+        "brand_slug": "bq-phones-108",
+        "device_count": 20,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b2b",
+        "brand_name": "Microsoft",
+        "brand_slug": "microsoft-phones-64",
+        "device_count": 32,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b3f",
+        "brand_name": "Philips",
+        "brand_slug": "philips-phones-11",
+        "device_count": 233,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b03",
+        "brand_name": "Cat",
+        "brand_slug": "cat-phones-89",
+        "device_count": 22,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b62",
+        "brand_name": "Xiaomi",
+        "brand_slug": "xiaomi-phones-80",
+        "device_count": 492,
+        "__v": 0
+    },
+    {
+        "_id": "66a82d1eab24ffb08cd89cdd",
+        "brand_name": "Oscal",
+        "brand_slug": "oscal-phones-134",
+        "device_count": 31,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b07",
+        "brand_name": "Cubot",
+        "brand_slug": "cubot-phones-130",
+        "device_count": 97,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b02",
+        "brand_name": "Casio",
+        "brand_slug": "casio-phones-77",
+        "device_count": 5,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b00",
+        "brand_name": "Bosch",
+        "brand_slug": "bosch-phones-10",
+        "device_count": 10,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b26",
+        "brand_name": "LG",
+        "brand_slug": "lg-phones-20",
+        "device_count": 667,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b19",
+        "brand_name": "i-mate",
+        "brand_slug": "i_mate-phones-35",
+        "device_count": 34,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b35",
+        "brand_name": "Nothing",
+        "brand_slug": "nothing-phones-128",
+        "device_count": 13,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b1c",
+        "brand_name": "Infinix",
+        "brand_slug": "infinix-phones-119",
+        "device_count": 163,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b3a",
+        "brand_name": "Orange",
+        "brand_slug": "orange-phones-71",
+        "device_count": 19,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b54",
+        "brand_name": "Tel.Me.",
+        "brand_slug": "tel_me_-phones-21",
+        "device_count": 7,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04afc",
+        "brand_name": "Bird",
+        "brand_slug": "bird-phones-34",
+        "device_count": 61,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b63",
+        "brand_name": "XOLO",
+        "brand_slug": "xolo-phones-85",
+        "device_count": 81,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b61",
+        "brand_name": "XCute",
+        "brand_slug": "xcute-phones-43",
+        "device_count": 4,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b5c",
+        "brand_name": "vivo",
+        "brand_slug": "vivo-phones-98",
+        "device_count": 561,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b2c",
+        "brand_name": "Mitac",
+        "brand_slug": "mitac-phones-25",
+        "device_count": 12,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b45",
+        "brand_name": "Razer",
+        "brand_slug": "razer-phones-117",
+        "device_count": 2,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b38",
+        "brand_name": "OnePlus",
+        "brand_slug": "oneplus-phones-95",
+        "device_count": 100,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b30",
+        "brand_name": "MWg",
+        "brand_slug": "mwg-phones-56",
+        "device_count": 5,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b0c",
+        "brand_name": "Ericsson",
+        "brand_slug": "ericsson-phones-2",
+        "device_count": 40,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af5",
+        "brand_name": "Apple",
+        "brand_slug": "apple-phones-48",
+        "device_count": 144,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b1a",
+        "brand_name": "i-mobile",
+        "brand_slug": "i_mobile-phones-52",
+        "device_count": 37,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b3b",
+        "brand_name": "Palm",
+        "brand_slug": "palm-phones-27",
+        "device_count": 17,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04af1",
+        "brand_name": "alcatel",
+        "brand_slug": "alcatel-phones-5",
+        "device_count": 414,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b23",
+        "brand_name": "Lava",
+        "brand_slug": "lava-phones-94",
+        "device_count": 174,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b34",
+        "brand_name": "Nokia",
+        "brand_slug": "nokia-phones-1",
+        "device_count": 591,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b32",
+        "brand_name": "Neonode",
+        "brand_slug": "neonode-phones-22",
+        "device_count": 3,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b0b",
+        "brand_name": "Energizer",
+        "brand_slug": "energizer-phones-106",
+        "device_count": 78,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b66",
+        "brand_name": "YU",
+        "brand_slug": "yu-phones-100",
+        "device_count": 13,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b09",
+        "brand_name": "Doogee",
+        "brand_slug": "doogee-phones-129",
+        "device_count": 145,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04afe",
+        "brand_name": "Blackview",
+        "brand_slug": "blackview-phones-116",
+        "device_count": 105,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b08",
+        "brand_name": "Dell",
+        "brand_slug": "dell-phones-61",
+        "device_count": 20,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b52",
+        "brand_name": "TCL",
+        "brand_slug": "tcl-phones-123",
+        "device_count": 91,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b18",
+        "brand_name": "Huawei",
+        "brand_slug": "huawei-phones-58",
+        "device_count": 507,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b1f",
+        "brand_name": "Intex",
+        "brand_slug": "intex-phones-102",
+        "device_count": 15,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04afa",
+        "brand_name": "BenQ",
+        "brand_slug": "benq-phones-31",
+        "device_count": 35,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b1b",
+        "brand_name": "Icemobile",
+        "brand_slug": "icemobile-phones-69",
+        "device_count": 61,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b58",
+        "brand_name": "Ulefone",
+        "brand_slug": "ulefone-phones-124",
+        "device_count": 137,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b17",
+        "brand_name": "HTC",
+        "brand_slug": "htc-phones-45",
+        "device_count": 296,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b31",
+        "brand_name": "NEC",
+        "brand_slug": "nec-phones-12",
+        "device_count": 73,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b13",
+        "brand_name": "Google",
+        "brand_slug": "google-phones-107",
+        "device_count": 39,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b05",
+        "brand_name": "Chea",
+        "brand_slug": "chea-phones-24",
+        "device_count": 12,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b40",
+        "brand_name": "Plum",
+        "brand_slug": "plum-phones-72",
+        "device_count": 113,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b2d",
+        "brand_name": "Mitsubishi",
+        "brand_slug": "mitsubishi-phones-8",
+        "device_count": 25,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b53",
+        "brand_name": "Tecno",
+        "brand_slug": "tecno-phones-120",
+        "device_count": 176,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b60",
+        "brand_name": "WND",
+        "brand_slug": "wnd-phones-51",
+        "device_count": 5,
+        "__v": 0
+    },
+    {
+        "_id": "647ed21d288dfcda06a04b36",
+        "brand_name": "Nvidia",
+        "brand_slug": "nvidia-phones-97",
+        "device_count": 3,
+        "__v": 0
+    }
+]

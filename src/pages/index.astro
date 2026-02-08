@@ -1,0 +1,431 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getBrandsWithPhones, getTotalPhoneCount } from "../data/api-phones";
+
+const brandsWithPhones = getBrandsWithPhones();
+const totalPhones = getTotalPhoneCount();
+const brandNames = brandsWithPhones.map((b) => b.brand.brand_name);
+const INITIAL_SHOW = 20;
+const INITIAL_BRANDS = 15;
+---
+
+<BaseLayout title="SpecMatch — Phone Specs Comparison Tool">
+  <div class="hero">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      {totalPhones.toLocaleString()} Phones
+    </div>
+    <h1 class="hero-title">Pick Two Phones<br/>Compare Specs Instantly</h1>
+    <p class="hero-desc">Select any two phones to see a detailed side-by-side comparison</p>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-bar">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="search" id="search-input" class="search-input" placeholder="Search phone models..." autocomplete="off" />
+    </div>
+    <div class="brand-filters" id="brand-filters">
+      <button class="brand-chip active" data-brand="all">All</button>
+      {brandNames.map((b) => (
+        <button class="brand-chip" data-brand={b}>{b}</button>
+      ))}
+    </div>
+  </div>
+
+  {brandsWithPhones.map((bwp, brandIdx) => (
+    <section
+      class={`brand-section ${brandIdx >= INITIAL_BRANDS ? "brand-overflow" : ""}`}
+      id={`brand-${bwp.brand.brand_slug}`}
+      data-brand={bwp.brand.brand_name}
+    >
+      <div class="brand-header">
+        <h2 class="brand-title">{bwp.brand.brand_name}</h2>
+        <span class="brand-count">{bwp.phones.length} phones</span>
+      </div>
+      <div class="phone-grid">
+        {bwp.phones.map((phone, i) => (
+          <div
+            class={`phone-card ${i >= INITIAL_SHOW ? "overflow-hidden" : ""}`}
+            data-slug={phone.slug}
+            data-brand={phone.brand.trim()}
+            data-name={`${phone.brand} ${phone.phone_name}`}
+          >
+            <input type="checkbox" class="phone-checkbox" value={phone.slug} />
+            <div class="card-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="10" height="10"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="card-thumb">
+              <img src={phone.image} alt={phone.phone_name} loading="lazy" width="72" height="72" onerror="this.style.display='none'" />
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">{phone.phone_name}</h3>
+              <div class="card-meta">
+                {phone.specs.chipset && <span class="meta-chip">{phone.specs.chipset.replace(/Qualcomm |Samsung |MediaTek /g, "")}</span>}
+                {phone.specs.ram && phone.specs.internal_storage && <span class="meta-text">{phone.specs.ram} · {phone.specs.internal_storage}</span>}
+                {phone.specs.primary_camera_resolution && <span class="meta-text">{phone.specs.primary_camera_resolution}</span>}
+                {phone.specs.battery_capacity && <span class="meta-text">{phone.specs.battery_capacity.replace(/Li-Po |Li-Ion /g, "")}</span>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {bwp.phones.length > INITIAL_SHOW && (
+        <button class="show-more-btn" data-brand-section={bwp.brand.brand_slug}>
+          Show More ({bwp.phones.length - INITIAL_SHOW} phones)
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      )}
+    </section>
+  ))}
+
+  {brandsWithPhones.length > INITIAL_BRANDS && (
+    <button class="show-more-brands-btn" id="show-more-brands">
+      More Brands ({brandsWithPhones.length - INITIAL_BRANDS})
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+  )}
+
+  <p class="no-results" id="no-results" style="display:none;">No matching phones found</p>
+
+  <!-- Floating Compare Dock -->
+  <div class="compare-dock" id="compare-dock">
+    <div class="dock-inner">
+      <div class="dock-slot" id="slot-0"><span class="slot-empty">Select Phone 1</span></div>
+      <span class="dock-vs">VS</span>
+      <div class="dock-slot" id="slot-1"><span class="slot-empty">Select Phone 2</span></div>
+      <button class="dock-btn" id="compare-btn" disabled>
+        Compare
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero { text-align: center; padding: 1.5rem 0; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.25rem 0.75rem; font-size: 0.72rem; font-weight: 600;
+    color: var(--c-accent); background: var(--c-accent-light);
+    border-radius: 20px; margin-bottom: 0.75rem;
+  }
+  .hero-title {
+    font-size: 1.6rem; font-weight: 800; color: var(--c-text);
+    letter-spacing: -0.03em; line-height: 1.3; margin-bottom: 0.4rem;
+  }
+  .hero-desc { font-size: 0.85rem; color: var(--c-text-secondary); }
+
+  /* ── Toolbar ── */
+  .toolbar { margin-bottom: 1.25rem; }
+  .search-bar { position: relative; margin-bottom: 0.75rem; }
+  .search-icon {
+    position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%);
+    color: var(--c-text-muted); pointer-events: none;
+  }
+  .search-input {
+    width: 100%; padding: 0.6rem 0.85rem 0.6rem 2.4rem; font-size: 0.85rem;
+    border: 1px solid var(--c-border); border-radius: var(--radius);
+    background: var(--c-surface); color: var(--c-text); outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-input:focus { border-color: var(--c-accent); box-shadow: 0 0 0 3px rgba(79,110,247,0.08); }
+  .search-input::placeholder { color: var(--c-text-muted); }
+  .brand-filters { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .brand-chip {
+    padding: 0.22rem 0.6rem; font-size: 0.72rem; font-weight: 500;
+    border: 1px solid var(--c-border); border-radius: 16px;
+    background: var(--c-surface); color: var(--c-text-secondary);
+    cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+  .brand-chip:hover { border-color: var(--c-accent); color: var(--c-accent); }
+  .brand-chip.active { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+
+  /* ── Brand Section ── */
+  .brand-section { margin-bottom: 1.75rem; }
+  .brand-section.hidden { display: none; }
+  .brand-section.brand-overflow { display: none; }
+  .brand-header {
+    display: flex; align-items: baseline; gap: 0.4rem;
+    margin-bottom: 0.6rem; padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--c-border-light);
+  }
+  .brand-title { font-size: 1rem; font-weight: 700; color: var(--c-text); }
+  .brand-count { font-size: 0.68rem; color: var(--c-text-muted); }
+
+  /* ── Phone Grid — horizontal list style ── */
+  .phone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.5rem;
+  }
+
+  /* ── Card — compact horizontal layout ── */
+  .phone-card {
+    position: relative; display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    background: var(--c-surface); border: 1.5px solid var(--c-border);
+    border-radius: 8px; cursor: pointer; user-select: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    overflow: hidden;
+  }
+  .phone-card:hover { border-color: #c0c6d2; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .phone-card.selected { border-color: var(--c-accent); background: var(--c-accent-light); }
+  .phone-card.disabled-card { opacity: 0.3; pointer-events: none; }
+  .phone-card.hidden, .phone-card.overflow-hidden { display: none; }
+  .phone-checkbox { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+
+  .card-check {
+    position: absolute; top: 0.35rem; right: 0.35rem;
+    width: 16px; height: 16px; border-radius: 4px;
+    border: 1.5px solid var(--c-border); background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2; transition: all 0.15s;
+  }
+  .card-check svg { display: none; }
+  .phone-card.selected .card-check { background: var(--c-accent); border-color: var(--c-accent); }
+  .phone-card.selected .card-check svg { display: block; color: #fff; }
+
+  .card-thumb {
+    width: 72px; height: 72px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: #f8f9fb; border-radius: 6px; overflow: hidden;
+  }
+  .card-thumb img {
+    display: block; width: 64px; height: 64px;
+    object-fit: contain; pointer-events: none;
+  }
+
+  .card-info { flex: 1; min-width: 0; pointer-events: none; }
+  .card-name {
+    font-size: 0.78rem; font-weight: 600; color: var(--c-text);
+    line-height: 1.25; margin-bottom: 0.2rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .card-meta {
+    display: flex; flex-wrap: wrap; gap: 0.2rem; align-items: center;
+  }
+  .meta-chip {
+    font-size: 0.6rem; padding: 0.05rem 0.3rem; border-radius: 3px;
+    background: #eef1fe; color: var(--c-accent); font-weight: 500;
+    white-space: nowrap; max-width: 130px;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .meta-text {
+    font-size: 0.6rem; color: var(--c-text-muted); white-space: nowrap;
+  }
+  .meta-text::before { content: "·"; margin-right: 0.15rem; }
+  .meta-text:first-child::before, .meta-chip + .meta-text::before { content: ""; margin: 0; }
+
+  /* ── Show More ── */
+  .show-more-btn, .show-more-brands-btn {
+    display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+    width: 100%; margin-top: 0.6rem; padding: 0.45rem 0;
+    font-size: 0.75rem; font-weight: 600; color: var(--c-accent);
+    background: transparent; border: 1px dashed var(--c-border);
+    border-radius: 8px; cursor: pointer; transition: all 0.15s;
+  }
+  .show-more-btn:hover, .show-more-brands-btn:hover {
+    background: var(--c-accent-light); border-color: var(--c-accent);
+  }
+  .show-more-btn.hidden-btn, .show-more-brands-btn.hidden-btn { display: none; }
+  .show-more-brands-btn { margin-bottom: 2rem; padding: 0.6rem 0; font-size: 0.82rem; }
+
+  .no-results { text-align: center; color: var(--c-text-muted); padding: 3rem 0; font-size: 0.85rem; }
+
+  /* ── Compare Dock ── */
+  .compare-dock {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--c-border);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+  }
+  .dock-inner {
+    max-width: 680px; margin: 0 auto; padding: 0.6rem 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .dock-slot {
+    flex: 1; height: 40px; padding: 0 0.6rem;
+    border: 1.5px dashed var(--c-border); border-radius: 8px;
+    background: var(--c-bg); display: flex; align-items: center;
+    gap: 0.4rem; overflow: hidden; transition: all 0.15s;
+  }
+  .dock-slot.filled { border-style: solid; border-color: var(--c-accent); background: var(--c-accent-light); }
+  .slot-empty { font-size: 0.72rem; color: var(--c-text-muted); }
+  .slot-img {
+    width: 24px; height: 24px; border-radius: 4px;
+    object-fit: contain; flex-shrink: 0; background: #fff;
+  }
+  .slot-name {
+    font-size: 0.72rem; font-weight: 600; color: var(--c-text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .dock-vs {
+    font-size: 0.68rem; font-weight: 800; color: var(--c-text-muted);
+    flex-shrink: 0;
+  }
+  .dock-btn {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0 1.2rem; height: 40px;
+    font-size: 0.82rem; font-weight: 700;
+    border: none; border-radius: 8px;
+    background: linear-gradient(135deg, #4f6ef7, #6c5ce7); color: #fff;
+    cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .dock-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+  .dock-btn:disabled { background: #d1d5db; color: #9ca3af; cursor: not-allowed; }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .phone-grid { grid-template-columns: 1fr; }
+    .card-thumb { width: 56px; height: 56px; }
+    .card-thumb img { width: 48px; height: 48px; }
+    .card-name { font-size: 0.72rem; }
+    .dock-inner { padding: 0.5rem 0.75rem; gap: 0.4rem; }
+    .dock-slot { height: 36px; }
+    .dock-btn { height: 36px; padding: 0 0.8rem; font-size: 0.75rem; }
+    .dock-vs { font-size: 0.6rem; }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll<HTMLDivElement>(".phone-card");
+    const checkboxes = document.querySelectorAll<HTMLInputElement>(".phone-checkbox");
+    const searchInput = document.getElementById("search-input") as HTMLInputElement;
+    const brandBtns = document.querySelectorAll<HTMLButtonElement>(".brand-chip");
+    const brandSections = document.querySelectorAll<HTMLElement>(".brand-section");
+    const compareBtn = document.getElementById("compare-btn") as HTMLButtonElement;
+    const noResults = document.getElementById("no-results")!;
+    const slot0 = document.getElementById("slot-0")!;
+    const slot1 = document.getElementById("slot-1")!;
+    const showMoreBrandsBtn = document.getElementById("show-more-brands");
+
+    const phoneMap: Record<string, { name: string; image: string }> = {};
+    cards.forEach((card) => {
+      const slug = card.dataset.slug || "";
+      const img = card.querySelector<HTMLImageElement>(".card-thumb img");
+      const nameEl = card.querySelector<HTMLElement>(".card-name");
+      phoneMap[slug] = { name: nameEl?.textContent || slug, image: img?.src || "" };
+    });
+
+    let activeBrand = "all";
+    let searchTerm = "";
+
+    cards.forEach((card) => {
+      card.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const cb = card.querySelector<HTMLInputElement>(".phone-checkbox")!;
+        if (cb.disabled) return;
+        cb.checked = !cb.checked;
+        updateUI();
+      });
+    });
+
+    document.querySelectorAll<HTMLButtonElement>(".show-more-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const sectionSlug = btn.dataset.brandSection;
+        const section = document.getElementById(`brand-${sectionSlug}`);
+        if (!section) return;
+        section.querySelectorAll<HTMLDivElement>(".phone-card.overflow-hidden").forEach((c) => c.classList.remove("overflow-hidden"));
+        btn.classList.add("hidden-btn");
+      });
+    });
+
+    if (showMoreBrandsBtn) {
+      showMoreBrandsBtn.addEventListener("click", () => {
+        document.querySelectorAll<HTMLElement>(".brand-section.brand-overflow").forEach((s) => s.classList.remove("brand-overflow"));
+        showMoreBrandsBtn.classList.add("hidden-btn");
+      });
+    }
+
+    function filterCards() {
+      const term = searchTerm.toLowerCase();
+      let totalVisible = 0;
+      brandSections.forEach((section) => {
+        const sectionBrand = section.dataset.brand || "";
+        const sectionCards = section.querySelectorAll<HTMLDivElement>(".phone-card");
+        let sectionVisible = 0;
+        sectionCards.forEach((card) => {
+          const name = (card.dataset.name || "").toLowerCase();
+          const brand = card.dataset.brand || "";
+          const matchSearch = !term || name.includes(term);
+          const matchBrand = activeBrand === "all" || brand === activeBrand;
+          card.classList.toggle("hidden", !matchSearch || !matchBrand);
+          if (matchSearch && matchBrand) sectionVisible++;
+        });
+        const isBrandOverflow = section.classList.contains("brand-overflow");
+        const showSection = sectionVisible > 0 && (activeBrand === "all" || sectionBrand === activeBrand);
+        section.classList.toggle("hidden", !showSection || (isBrandOverflow && !term && activeBrand === "all"));
+        totalVisible += showSection ? sectionVisible : 0;
+      });
+      noResults.style.display = totalVisible === 0 ? "block" : "none";
+    }
+
+    searchInput.addEventListener("input", () => {
+      searchTerm = searchInput.value;
+      if (searchTerm) {
+        document.querySelectorAll<HTMLDivElement>(".phone-card.overflow-hidden").forEach((c) => c.classList.remove("overflow-hidden"));
+        document.querySelectorAll<HTMLButtonElement>(".show-more-btn").forEach((b) => b.classList.add("hidden-btn"));
+      }
+      filterCards();
+    });
+
+    brandBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        brandBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeBrand = btn.dataset.brand || "all";
+        if (activeBrand !== "all") {
+          brandSections.forEach((s) => {
+            if (s.dataset.brand === activeBrand && s.classList.contains("brand-overflow")) s.classList.remove("brand-overflow");
+          });
+        }
+        filterCards();
+      });
+    });
+
+    function getSelected(): string[] {
+      return Array.from(checkboxes).filter((cb) => cb.checked).map((cb) => cb.value);
+    }
+
+    function renderSlot(el: HTMLElement, slug: string | null, placeholder: string) {
+      if (!slug) {
+        el.innerHTML = `<span class="slot-empty">${placeholder}</span>`;
+        el.classList.remove("filled");
+        return;
+      }
+      const p = phoneMap[slug];
+      el.innerHTML = `<img class="slot-img" src="${p.image}" alt="" width="24" height="24" onerror="this.style.display='none'" /><span class="slot-name">${p.name}</span>`;
+      el.classList.add("filled");
+    }
+
+    function updateUI() {
+      const sel = getSelected();
+      compareBtn.disabled = sel.length !== 2;
+      cards.forEach((card) => {
+        const cb = card.querySelector<HTMLInputElement>(".phone-checkbox")!;
+        card.classList.toggle("selected", cb.checked);
+        card.classList.toggle("disabled-card", !cb.checked && sel.length >= 2);
+      });
+      renderSlot(slot0, sel[0] || null, "Select Phone 1");
+      renderSlot(slot1, sel[1] || null, "Select Phone 2");
+      checkboxes.forEach((cb) => { cb.disabled = !cb.checked && sel.length >= 2; });
+    }
+
+    compareBtn.addEventListener("click", () => {
+      const sel = getSelected();
+      if (sel.length === 2) window.location.href = `/compare?a=${sel[0]}&b=${sel[1]}`;
+    });
+  });
+</script>

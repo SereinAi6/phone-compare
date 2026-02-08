@@ -1,0 +1,190 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Phone Specs Comparison Tool — Pick two phones and instantly compare key specifications" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="site-logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+          </div>
+          <div class="logo-text-group">
+            <span class="logo-text">PhoneCompare</span>
+            <span class="logo-sub">Specs Comparison Tool</span>
+          </div>
+        </a>
+        <nav class="header-nav">
+          <a href="/" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            Home
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          PhoneCompare
+        </div>
+        <p class="footer-note">Data is for reference only. Please verify with official manufacturer specs.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --c-bg: #f0f2f5;
+    --c-surface: #ffffff;
+    --c-border: #e4e7ec;
+    --c-border-light: #f0f2f5;
+    --c-text: #1a1d26;
+    --c-text-secondary: #5f6980;
+    --c-text-muted: #9aa1b1;
+    --c-accent: #4f6ef7;
+    --c-accent-light: #eef1fe;
+    --c-accent-dark: #3b54d4;
+    --c-green: #10b981;
+    --c-green-light: #ecfdf5;
+    --c-amber: #f59e0b;
+    --c-amber-light: #fffbeb;
+    --c-header-bg: #111827;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--c-text);
+    background: var(--c-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; }
+
+  /* ===== Header ===== */
+  .site-header {
+    background: var(--c-header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .header-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4f6ef7, #7c5cfc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .logo-text-group { display: flex; flex-direction: column; line-height: 1.2; }
+
+  .logo-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .logo-sub {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
+  }
+
+  .header-nav { display: flex; gap: 1rem; }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 500;
+  }
+
+  .nav-link:hover { color: rgba(255,255,255,0.9); }
+
+  /* ===== Main ===== */
+  main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 7rem;
+    min-height: calc(100vh - 58px - 100px);
+  }
+
+  /* ===== Footer ===== */
+  .site-footer {
+    background: var(--c-header-bg);
+    padding: 2rem 1.5rem;
+  }
+
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 0.3rem;
+  }
+
+  .footer-note {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.2);
+  }
+</style>
