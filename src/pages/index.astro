@@ -297,6 +297,7 @@ const INITIAL_BRANDS = 15;
 </style>
 
 <script>
+  const BASE_URL = document.querySelector<HTMLMetaElement>('meta[name="base-url"]')?.content || '/';
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll<HTMLDivElement>(".phone-card");
     const checkboxes = document.querySelectorAll<HTMLInputElement>(".phone-checkbox");
@@ -425,7 +426,7 @@ const INITIAL_BRANDS = 15;
 
     compareBtn.addEventListener("click", () => {
       const sel = getSelected();
-      if (sel.length === 2) window.location.href = `/compare?a=${sel[0]}&b=${sel[1]}`;
+      if (sel.length === 2) window.location.href = `${BASE_URL}compare?a=${sel[0]}&b=${sel[1]}`;
     });
   });
 </script>

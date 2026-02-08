@@ -6,4 +6,5 @@ export default defineConfig({
   output: 'static',
   site: 'https://sereinai6.github.io',
   base: '/phone-compare',
+  trailingSlash: 'ignore',
 });

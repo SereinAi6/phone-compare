@@ -14,6 +14,7 @@ const phones = getAllPhones();
 <script define:vars={{ phonesJSON: JSON.stringify(phones) }}>
   const phones = JSON.parse(phonesJSON);
   const phoneMap = {};
+  const BASE_URL = document.querySelector('meta[name="base-url"]')?.content || '/';
   phones.forEach(p => phoneMap[p.slug] = p);
 
   function esc(s) {
@@ -49,7 +50,7 @@ const phones = getAllPhones();
       root.innerHTML = `
         <div class="error-state">
           <p>Please select two devices to compare</p>
-          <a href="/" class="cta-link">← Back to selection</a>
+          <a href="${BASE_URL}" class="cta-link">← Back to selection</a>
         </div>`;
       return;
     }
@@ -127,7 +128,7 @@ const phones = getAllPhones();
     ).join("");
 
     root.innerHTML = `
-      <a href="/" class="back-link">
+      <a href="${BASE_URL}" class="back-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
         Back
       </a>
@@ -162,7 +163,7 @@ const phones = getAllPhones();
       </div>
 
       <div class="bottom-cta">
-        <a href="/" class="cta-link">
+        <a href="${BASE_URL}" class="cta-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
           Compare Other Devices
         </a>
