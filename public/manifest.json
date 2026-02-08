@@ -1,0 +1,16 @@
+{
+  "name": "PhoneCompare - Phone Specs Comparison",
+  "short_name": "PhoneCompare",
+  "description": "Compare phone specifications side-by-side from 4,000+ smartphones",
+  "start_url": "/phone-compare/",
+  "display": "standalone",
+  "background_color": "#f0f2f5",
+  "theme_color": "#4f6ef7",
+  "icons": [
+    {
+      "src": "/phone-compare/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

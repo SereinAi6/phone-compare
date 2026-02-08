@@ -3,9 +3,57 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getAllPhones, type ApiPhone } from "../data/api-phones";
 
 const phones = getAllPhones();
+
+// Get phone slugs from URL for dynamic SEO
+const url = new URL(Astro.request.url);
+const slugA = url.searchParams.get('a');
+const slugB = url.searchParams.get('b');
+
+let pageTitle = "Compare Phones - PhoneCompare";
+let pageDescription = "Compare detailed specifications of two smartphones side-by-side";
+
+if (slugA && slugB) {
+  const phoneA = phones.find(p => p.slug === slugA);
+  const phoneB = phones.find(p => p.slug === slugB);
+  
+  if (phoneA && phoneB) {
+    pageTitle = `${phoneA.phone_name} vs ${phoneB.phone_name} - Specs Comparison`;
+    pageDescription = `Compare ${phoneA.phone_name} and ${phoneB.phone_name} specifications including camera, battery, display, performance, and price differences.`;
+  }
+}
 ---
 
-<BaseLayout title="Device Comparison — SpecMatch" description="Detailed specs comparison">
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- JSON-LD for Comparison -->
+  {slugA && slugB && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ComparisonPage",
+      "name": pageTitle,
+      "description": pageDescription
+    })} />
+  )}
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.serein.ink/phone-compare/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare",
+        "item": "https://www.serein.ink/phone-compare/compare"
+      }
+    ]
+  })} />
+  
   <div id="compare-root">
     <div class="loading-state">Loading...</div>
   </div>

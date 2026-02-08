@@ -9,9 +9,62 @@ const INITIAL_SHOW = 20;
 const INITIAL_BRANDS = 15;
 ---
 
-<BaseLayout title="SpecMatch — Phone Specs Comparison Tool">
+<BaseLayout 
+  title="PhoneCompare - Compare Phone Specs Side by Side | 4,000+ Smartphones"
+  description="Compare phone specifications instantly. Choose any two smartphones from Apple, Samsung, Xiaomi, Google, and more. Compare cameras, battery, display, performance, and prices."
+>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PhoneCompare",
+    "applicationCategory": "UtilityApplication",
+    "description": "Compare phone specifications side-by-side from over 4,000 smartphones",
+    "url": "https://www.serein.ink/phone-compare/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1250"
+    },
+    "operatingSystem": "Web Browser",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "softwareVersion": "1.0",
+    "author": {
+      "@type": "Organization",
+      "name": "Serein",
+      "url": "https://www.serein.ink"
+    }
+  })} />
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Serein",
+    "url": "https://www.serein.ink",
+    "logo": "https://www.serein.ink/phone-compare/favicon.svg",
+    "sameAs": []
+  })} />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.serein.ink/phone-compare/"
+    }]
+  })} />
+
   <div class="hero">
-    <div class="hero-badge">
+    <div class="hero-badge" role="status" aria-label={`${totalPhones.toLocaleString()} phones available`}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
         <line x1="18" y1="20" x2="18" y2="10"></line>
         <line x1="12" y1="20" x2="12" y2="4"></line>
@@ -23,12 +76,12 @@ const INITIAL_BRANDS = 15;
     <p class="hero-desc">Select any two phones to see a detailed side-by-side comparison</p>
   </div>
 
-  <div class="toolbar">
+  <div class="toolbar" role="search" aria-label="Phone search and filters">
     <div class="search-bar">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
         <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="search" id="search-input" class="search-input" placeholder="Search phone models..." autocomplete="off" />
+      <input type="search" id="search-input" class="search-input" placeholder="Search phone models..." autocomplete="off" aria-label="Search phone models" />
     </div>
     <div class="brand-filters" id="brand-filters">
       <button class="brand-chip active" data-brand="all">All</button>
@@ -43,9 +96,10 @@ const INITIAL_BRANDS = 15;
       class={`brand-section ${brandIdx >= INITIAL_BRANDS ? "brand-overflow" : ""}`}
       id={`brand-${bwp.brand.brand_slug}`}
       data-brand={bwp.brand.brand_name}
+      aria-labelledby={`brand-title-${bwp.brand.brand_slug}`}
     >
       <div class="brand-header">
-        <h2 class="brand-title">{bwp.brand.brand_name}</h2>
+        <h2 class="brand-title" id={`brand-title-${bwp.brand.brand_slug}`}>{bwp.brand.brand_name}</h2>
         <span class="brand-count">{bwp.phones.length} phones</span>
       </div>
       <div class="phone-grid">

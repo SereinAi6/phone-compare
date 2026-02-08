@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.serein.ink/phone-compare/sitemap.xml
