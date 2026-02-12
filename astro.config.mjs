@@ -5,6 +5,6 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   output: 'static',
   site: 'https://www.serein.ink',
-  base: '/phone-compare',
+  base: '/',
   trailingSlash: 'ignore',
 });
